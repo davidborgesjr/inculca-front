@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Link } from 'react-router-dom';
+import ActivitiesPage from './pages/ActivitiesPage';
+
+import HomePage from './pages/HomePage';
+import NoMatchPage from './pages/NoMatchPage';
+import ParentsPage from './pages/ParentsPage';
+import ProfessorPage from './pages/ProfessorPage';
+import StudentPage from './pages/StudentPage';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/" element={<HomePage />}>
+          <Route path="professor" element={<ProfessorPage />} />
+          <Route path="send-activity" element={<ActivitiesPage />} />
+          <Route path="parent" element={<ParentsPage />} />
+          <Route path="student" element={<StudentPage />} />
+          <Route path="*" element={<NoMatchPage />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
