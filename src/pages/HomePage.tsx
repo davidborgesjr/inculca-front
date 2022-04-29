@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 export default function HomePage() {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1>Inculca</h1>
       <nav>
         <Link to="professor">
           <h1>Professor</h1>

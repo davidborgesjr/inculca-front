@@ -64,11 +64,6 @@ export default function QuestionsCard({
     <div style={{ minWidth: '400px' }}>
       <Card className={classes.root}>
         <CardHeader title={cardTitle} subheader={cardSubHeader} />
-        {/* <CardMedia
-        className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
-      /> */}
         <CardContent style={{ minHeight: '100px' }}>
           <Typography variant="body2" color="textSecondary" component="p">
             {cardDescription}

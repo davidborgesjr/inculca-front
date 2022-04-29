@@ -8,6 +8,9 @@ import { ISelectCombo } from '../model/SelectCombo';
 import { getQuestions } from '../services/apiService';
 import 'date-fns';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import ComplementaryActivityPage from './ComplementaryActivityPage';
 // import Grid from '@material-ui/core/Grid';
 // import DateFnsUtils from '@date-io/date-fns';
 // import {
@@ -16,6 +19,21 @@ import TextField from '@material-ui/core/TextField';
 // } from '@material-ui/pickers';
 
 export default function ActivitiesPage() {
+  const date = new Date();
+
+  //"2017-05-24"
+
+  const getFullZeros = (value: number) => {
+    return value > 10 ? value : '0' + value;
+  };
+
+  const getDateLabel = () => {
+    const test = `${date.getFullYear()}-${getFullZeros(
+      date.getMonth()
+    )}-${getFullZeros(date.getDate())}`;
+    console.log(test);
+    return test;
+  };
   const inputListSubjects: ISelectCombo[] = [
     { id: '516df9cd-0102-42b8-81db-cdb9b3af6ae7', description: 'Matemática' },
   ];
@@ -85,15 +103,19 @@ export default function ActivitiesPage() {
     setSelectedCard(selectedCard);
   };
 
-  let mainJsx;
+  const handleClickButton = () => {
+    console.log('próxima atividade');
+  };
+
+  let questionsCardTsx;
   if (showQuestions) {
-    mainJsx = (
+    questionsCardTsx = (
       <div className="flex justify-center my-4">
         <Loading />
       </div>
     );
     if (!loading) {
-      mainJsx = (
+      questionsCardTsx = (
         <div style={{ display: 'inline-flex', gap: '5%' }}>
           {payload.questions.map(question => {
             return (
@@ -120,7 +142,8 @@ export default function ActivitiesPage() {
             id="date-disponibilizacao"
             label="Data de disponibilização"
             type="date"
-            defaultValue="2017-05-24"
+            // defaultValue="2017-05-24"
+            defaultValue={getDateLabel()}
             variant="outlined"
             InputLabelProps={{
               shrink: true,
@@ -151,16 +174,11 @@ export default function ActivitiesPage() {
             rows={4}
             defaultValue=""
           />
+          <ComplementaryActivityPage></ComplementaryActivityPage>
         </div>
       );
     }
   };
-
-  // const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-
-  // const handleDateChange = (date: Date | null) => {
-  //   setSelectedDate(date);
-  // };
 
   return (
     <>
@@ -176,9 +194,21 @@ export default function ActivitiesPage() {
           labelName="Unidades Temáticas"
           handleFunction={handleChangeInputListTematicUnits}
         />
-        {mainJsx}
+        {questionsCardTsx}
+        {otherFields()}
+      </div>
+    </>
+  );
+}
 
-        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
+// const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+
+// const handleDateChange = (date: Date | null) => {
+//   setSelectedDate(date);
+// };
+/* 
+{
+  <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container justifyContent="space-around">
             <KeyboardDatePicker
               margin="normal"
@@ -192,9 +222,7 @@ export default function ActivitiesPage() {
               }}
             />
           </Grid>
-        </MuiPickersUtilsProvider> */}
-        {otherFields()}
-      </div>
-    </>
-  );
+        </MuiPickersUtilsProvider> 
 }
+
+*/
